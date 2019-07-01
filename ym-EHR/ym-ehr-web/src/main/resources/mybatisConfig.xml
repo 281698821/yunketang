@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+	<!-- 定义别名 -->
+	<typeAliases>
+		<!-- 自动为包下取别名 -->
+		<package name="cn.itsource.model" />
+	</typeAliases>
+	
+	<!-- 物理分页拦截器 -->
+	<!-- 支持的数据库 oracle,mysql,sqlserver2005+, mariadb,sqlite,hsqldb,postgresql,db2,informix -->
+	<plugins> 
+	    <!-- 打印完整sql语句   mysad  放在前面才能拿到  pagehelpe 分页后的sql语句 否则 只能拿到分页前的sql语句-->
+	   <!-- <plugin interceptor="org.kd.intercepts.MybatisAutoSql" />-->
+
+		<plugin interceptor="com.github.pagehelper.PageInterceptor" /> 
+
+		
+	</plugins>  
+
+
+
+</configuration>

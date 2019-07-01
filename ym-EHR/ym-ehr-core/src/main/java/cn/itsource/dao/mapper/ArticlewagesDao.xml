@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itsource.dao.ArticlewagesDao">
+    <!-- <resultMap id="BaseResultMap" type="cn.itsource.model.Articlewages">
+       &lt;!&ndash;
+         WARNING - @mbg.generated
+       &ndash;&gt;
+       <id column="id" jdbcType="INTEGER" property="id" />
+       <result column="emp_id" jdbcType="INTEGER" property="empId" />
+       <result column="empName" jdbcType="VARCHAR" property="empname" />
+       <result column="shouldSend" jdbcType="INTEGER" property="shouldsend" />
+       <result column="bonus" jdbcType="INTEGER" property="bonus" />
+       <result column="fine" jdbcType="INTEGER" property="fine" />
+       <result column="insured" jdbcType="INTEGER" property="insured" />
+       <result column="time" jdbcType="TIMESTAMP" property="time" />
+       <result column="realHair" jdbcType="INTEGER" property="realhair" />
+       <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete" />
+     </resultMap>-->
+    <update id="updateDeletes">
+        update ehr_articlewages set logicToDelete=0  where  id in (${ids})
+    </update>
+    <!-- 拿到名字和邮件 -->
+    <select id="findbyname" resultMap="findbynameMap">
+        SELECT ea.id aid,ee.id eid,ee.name,ee.email,ee.paygrades_id FROM ehr_articlewages ea JOIN ehr_emp ee ON  ee.id=ea.emp_id
+    </select>
+
+    <resultMap id="findbynameMap" type="Articlewages">
+        <id property="id" column="aid"></id>
+        <association property="emp" javaType="Emp">
+            <id property="id" column="eid"></id>
+            <result property="name" column="name"></result>
+            <result property="paygradesId" column="paygrades_id"></result>
+            <result property="email" column="email"></result>
+        </association>
+    </resultMap>
+
+
+    <!-- 通过员工拿到奖惩 -->
+    <select id="findRewar" parameterType="int" resultMap="findRewarMap">
+        SELECT er.money,er.judge,ee.name FROM ehr_emp ee JOIN ehr_rewardpunish er ON er.emp_id= ee.id
+        WHERE ee.id=#{id}
+    </select>
+
+    <resultMap id="findRewarMap" type="RewardPunish">
+        <result property="money" column="money"/>
+        <result property="judge" column="judge"/>
+        <association property="emp" javaType="Emp">
+            <result property="name" column="name"></result>
+        </association>
+    </resultMap>
+
+
+
+    <!-- 通过员工拿到对应的基本工资，补贴，社保率 -->
+    <select id="findbycompen" resultMap="findbycompenMap">
+        SELECT ec.basicSalary,ec.subsidies,es.purchaseRate FROM ehr_emp ee JOIN ehr_compensation ec ON ec.emp_id=ee.id
+        JOIN ehr_socialsecurity es ON es.id=ec.socialSecurity_id
+        WHERE ee.id=#{id}
+    </select>
+    <resultMap id="findbycompenMap" type="cn.itsource.dto.Compensationdto">
+        <result property="basicsalary" column="basicSalary"/>
+        <result property="subsidies" column="subsidies"/>
+        <association property="emp" javaType="Emp">
+        </association>
+        <association property="socialsecurity" javaType="Socialsecurity">
+            <result property="purchaserate" column="purchaseRate"/>
+        </association>
+    </resultMap>
+
+
+
+    <!--SELECT ee.id,ee.name,ec.basicSalary,ec.subsidies,es.purchaseRate,er.money,er.judge FROM ehr_emp ee JOIN ehr_compensation ec ON ec.emp_id=ee.id
+    JOIN ehr_socialsecurity es ON es.id=ec.socialSecurity_id
+    JOIN ehr_rewardpunish er ON er.emp_id= ee.id
+    WHERE ee.id=1--><!--
+SELECT ee.id,ee.name,ep.salary,ec.basicSalary,ec.subsidies,es.purchaseRate,er.money,er.judge FROM ehr_emp ee JOIN ehr_compensation ec ON ec.emp_id=ee.id
+JOIN ehr_socialsecurity es ON es.id=ec.socialSecurity_id
+JOIN ehr_rewardpunish er ON er.emp_id= ee.id
+JOIN ehr_paygrades ep ON ep.id=ee.paygrades_id
+WHERE ee.id=1-->
+
+</mapper>

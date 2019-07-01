@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itsource.dao.ApplicantDao">
+  <resultMap id="BaseResultMap" type="cn.itsource.model.Applicant">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="currentAddress" jdbcType="VARCHAR" property="currentaddress" />
+    <result column="applicantTime" jdbcType="DATE" property="applicanttime" />
+    <result column="specialty" jdbcType="VARCHAR" property="specialty" />
+    <result column="comments" jdbcType="VARCHAR" property="comments" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itsource.dao.SocialsecurityDao">
+  <resultMap id="BaseResultMap" type="cn.itsource.model.Socialsecurity">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="purchaseRate" jdbcType="INTEGER" property="purchaserate" />
+    <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete" />
+  </resultMap>
+
+</mapper>

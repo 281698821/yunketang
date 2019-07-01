@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itsource.dao.PositionDao">
+    <resultMap id="BaseResultMap" type="cn.itsource.model.Position">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="pid" jdbcType="INTEGER" property="id" />
+        <result column="pname" jdbcType="VARCHAR" property="name" />
+        <result column="pmark" jdbcType="VARCHAR" property="mark" />
+        <result column="plogicToDelete" jdbcType="INTEGER" property="logictodelete" />
+
+        <association property="dept" javaType="cn.itsource.model.Dept">
+            <id property="id" column="did" />
+            <result property="name" column="dname" />
+            <result property="mark" column="dmark" />
+            <result property="logictodelete" column="dlogicToDelete" />
+        </association>
+    </resultMap>
+
+    <select id="queryPageListByParams" resultMap="BaseResultMap" parameterType="cn.itsource.model.Position">
+        select p.id pid,p.name pname,p.mark pmark,p.logicToDelete plogicToDelete,
+        d.id did,d.name dname,d.mark dmark,d.logicToDelete dlogicToDelete
+        from ehr_position p join ehr_dept d
+        on p.dept_id = d.id
+        <where>
+            <if test="name!=null and name!=''">
+                and p.name=#{name}
+            </if>
+            <if test="dept!=null">
+                and dept_id=#{dept.id}
+            </if>
+
+            <if test="logictodelete!=null">
+                and p.logicToDelete = 1
+            </if>
+
+        </where>
+    </select>
+
+
+    <select id="queryAllListWithDept" resultMap="BaseResultMap">
+      select p.id pid,p.name pname,p.mark pmark,p.logicToDelete plogicToDelete,
+      d.id did,d.name dname,d.mark dmark,d.logicToDelete dlogicToDelete
+      from ehr_position p join ehr_dept d
+      on p.dept_id = d.id
+      and p.logicToDelete = 1
+    </select>
+
+    <!--根据id查询联合数据-->
+    <select id="queryPositionById" resultMap="BaseResultMap" parameterType="long">
+       select p.id pid,p.name pname,p.mark pmark,p.logicToDelete plogicToDelete,
+      d.id did,d.name dname,d.mark dmark,d.logicToDelete dlogicToDelete
+      from ehr_position p join ehr_dept d
+      on p.dept_id = d.id
+      where p.id = #{id}
+    </select>
+
+    <!--保存部门的方法-->
+    <insert id="insertWithDept" parameterType="cn.itsource.model.Position">
+      insert into ehr_position(name,mark,dept_id)
+        values(#{name},#{mark},#{dept.id})
+    </insert>
+
+    <update id="updateWithDept" parameterType="cn.itsource.model.Position">
+        update ehr_position
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="dept!=null">
+                dept_id=#{dept.id},
+            </if>
+            <if test="mark!=null">
+                mark=#{mark}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>

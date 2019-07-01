@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>ym-EHR-OA</groupId>
+        <artifactId>ym-EHR-OA</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ym-EHR-OA</groupId>
+    <artifactId>ym-EHR</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ym-ehr-common</module>
+        <module>ym-ehr-core</module>
+        <module>ym-ehr-web</module>
+    </modules>
+    <dependencies>
+        <!-- 依赖公共基础-->
+        <dependency>
+            <groupId>ym-EHR-OA</groupId>
+            <artifactId>ym-base-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+
+
+    </dependencies>
+
+</project>

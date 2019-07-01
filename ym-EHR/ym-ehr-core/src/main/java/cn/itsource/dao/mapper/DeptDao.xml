@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.itsource.dao.DeptDao">
+  <resultMap id="BaseResultMap" type="cn.itsource.model.Dept">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="did" jdbcType="INTEGER" property="id" />
+    <result column="dname" jdbcType="VARCHAR" property="name" />
+    <result column="dmark" jdbcType="VARCHAR" property="mark" />
+
+    <result column="dlogicToDelete" jdbcType="INTEGER" property="logictodelete" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+
+    <association property="company" javaType="cn.itsource.model.Company">
+      <id property="id" column="cid" />
+      <result property="name" column="cname" />
+      <result property="mark" column="cmark" />
+      <result property="logictodelete" column="clogicToDelete" />
+      <result property="createtime" column="createTime" />
+    </association>
+
+  </resultMap>
+
+  <select id="queryPageListByParams" resultMap="BaseResultMap" parameterType="cn.itsource.model.Dept">
+      select d.id did,d.name dname,c.id cid,c.name cname,d.mark dmark, d.logicToDelete dlogicToDelete,d.avatar,
+       c.mark cmark,c.logicToDelete clogicToDelete,c.createTime
+       from ehr_dept d
+       join ehr_company c
+       on c.id=d.company_id
+        <where>
+             <if test="name!=null and name!=''">
+               and d.name = #{name}
+             </if>
+         <if test="company!=null">
+           and company_id = #{company.id}
+         </if>
+
+            <if test="logictodelete!=null">
+                and d.logicToDelete = 1
+            </if>
+
+       </where>
+  </select>
+
+
+    <select id="queryAllListWithCompany" resultMap="BaseResultMap">
+        select d.id did,d.name dname,c.id cid,c.name cname,d.mark dmark, d.logicToDelete dlogicToDelete,d.avatar,
+       c.mark cmark,c.logicToDelete clogicToDelete,c.createTime
+       from ehr_dept d
+       left join ehr_company c
+       on c.id=d.company_id
+       where d.logicToDelete = 1
+    </select>
+
+    <!--根据id查询数据-->
+    <select id="queryDeptById" resultMap="BaseResultMap" parameterType="long">
+        select d.id did,d.name dname,c.id cid,c.name cname,d.mark dmark, d.logicToDelete dlogicToDelete,d.avatar,
+       c.mark cmark,c.logicToDelete clogicToDelete,c.createTime
+       from ehr_dept d
+       left join ehr_company c
+       on c.id=d.company_id
+       where d.id = #{id}
+    </select>
+
+    <!--保存部门的方法-->
+    <insert id="insertWithCompany" parameterType="cn.itsource.model.Dept">
+        insert into ehr_dept(name,mark,company_id)
+        values(#{name},#{mark},#{company.id})
+    </insert>
+
+    <update id="updateWithCompany" parameterType="cn.itsource.model.Dept">
+        update ehr_dept
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="company!=null">
+                company_id=#{company.id},
+            </if>
+            <if test="mark!=null">
+                mark=#{mark}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

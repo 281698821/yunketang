@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itsource.dao.RecruitmentdemandDao">
+    <resultMap id="BaseResultMap" type="cn.itsource.model.Recruitmentdemand">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="skillsRequired" jdbcType="VARCHAR" property="skillsrequired"/>
+        <result column="hiring" jdbcType="INTEGER" property="hiring"/>
+        <result column="wageBudget" jdbcType="INTEGER" property="wagebudget"/>
+        <result column="initiateTime" jdbcType="DATE" property="initiatetime"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="mark" jdbcType="VARCHAR" property="mark"/>
+        <result column="emp_id" jdbcType="INTEGER" property="empId"/>
+        <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete"/>
+    </resultMap>
+
+    <resultMap id="recruitmentdemandDto" type="cn.itsource.dto.RecruitmentdemandDto">
+        <id column="id" property="id"/>
+        <result property="skillsrequired" column="skillsrequired"/>
+        <result property="hiring" column="hiring"/>
+        <result property="wagebudget" column="wagebudget"/>
+        <result property="initiatetime" column="initiatetime"/>
+        <result property="state" column="state"/>
+        <result property="mark" column="mark"/>
+        <result property="empId" column="emp_id"/>
+        <result property="logictodelete" column="logictodelete"/>
+        <association property="emp" javaType="cn.itsource.model.Emp">
+            <id column="eid" property="id"/>
+            <result column="ename" property="name"/>
+        </association>
+    </resultMap>
+    <select id="queryListByParam" parameterType="cn.itsource.query.RecruitmentdemandQuery"
+            resultMap="recruitmentdemandDto">
+        SELECT rec.id,rec.skillsrequired,rec.hiring,
+        rec.wagebudget,rec.initiatetime,rec.state,rec.mark,rec.emp_id,rec.logictodelete,emp.name as ename
+        FROM ehr_recruitmentdemand rec left JOIN ehr_emp emp ON rec.emp_id= emp.id
+        <where>
+            <if test="begin != null and begin != ' ' and  end != null and end != ' ' ">
+                <![CDATA[
+              AND  rec.hiring >= #{begin} and rec.hiring <= #{end}
+            ]]>
+            </if>
+            <if test="state != null and state != ' ' ">
+                AND rec.state= #{state}
+            </if>
+            AND rec.logicToDelete = 1
+        </where>
+    </select>
+
+    <select id="queryAll" resultMap="recruitmentdemandDto">
+    SELECT rec.id,rec.skillsrequired,rec.hiring,
+    rec.wagebudget,rec.initiatetime,rec.state,rec.mark,rec.emp_id,rec.logictodelete,emp.name as ename
+    FROM ehr_recruitmentdemand rec left JOIN ehr_emp emp ON rec.emp_id= emp.id where rec.logicToDelete = #{arg0}
+    </select>
+
+</mapper>

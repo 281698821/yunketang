@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itsource.dao.CompensationDao">
+  <resultMap id="BaseResultMap" type="cn.itsource.model.Compensation">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="basicSalary" jdbcType="INTEGER" property="basicsalary" />
+    <result column="subsidies" jdbcType="INTEGER" property="subsidies" />
+    <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete" />
+    <result column="emp_id" property="empId" javaType="INTEGER"/>
+    <result property="socialsecurityId" column="socialSecurity_id" javaType="INTEGER"/>
+  </resultMap>
+
+
+
+  <resultMap id="ExtendsResultMap" type="cn.itsource.dto.Compensationdto">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="basicSalary" jdbcType="INTEGER" property="basicsalary" />
+    <result column="subsidies" jdbcType="INTEGER" property="subsidies" />
+    <result column="emp_id" property="empId" javaType="INTEGER"/>
+    <result property="socialsecurityId" column="socialSecurity_id" javaType="INTEGER"/>
+    <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete" />
+    <association property="emp" javaType="cn.itsource.dto.EmpDto">
+      <id column="eid" property="id"/>
+      <result property="name" column="ename"/>
+      <!--<result property="userid" column="userid"/>
+      <result property="age" column="age"/>
+      <result property="avatar" column="avatar"/>
+      <result property="birthday" column="birthday"/>
+      <result property="currentaddress" column="currentaddress"/>
+      <result property="deptId" column="deptId"/>
+      <result property="email" column="email"/>
+      <result property="img" column="img"/>
+      <result property="inductiontime" column="inductiontime"/>
+      <result property="islogin" column="islogin"/>
+      <result property="logictodelete" column="elogictodelete"/>
+      <result property="mark" column="mark"/>
+      <result property="paygradesId" column="paygradesId"/>
+      <result property="qq" column="qq"/>
+      <result property="state" column="state"/>
+      <result property="specialty" column="specialty"/>
+      <result property="sign" column="sign"/>
+      <result property="sex" column="sex"/>
+      <result property="password" column="password"/>
+      <result property="positionId" column="positionId"/>
+      <result property="phone" column="phone"/>-->
+    </association>
+    <association property="socialsecurity" javaType="Socialsecurity">
+      <id column="sid" property="id"/>
+      <result property="purchaserate" column="purchaserate"/>
+    </association>
+  </resultMap>
+  <select id="queryListByPage" resultMap="ExtendsResultMap" parameterType="java.lang.String">
+    select c.*,e.id as eid,e.name as 'ename',s.purchaseRate,s.id as sid
+    from ehr_compensation c join ehr_emp  e on  c.emp_id=e.id join ehr_socialsecurity s on s.id =c.socialSecurity_id
+    <where>
+      <if test="name!=null and name !=''">
+        and e.name=#{name}
+      </if>
+      and c.logicToDelete =1
+    </where>
+</select>
+  <select id="findById" resultMap="ExtendsResultMap" parameterType="Integer">
+    select c.*,e.id as eid,e.name as 'ename',s.purchaseRate,s.id as sid
+    from ehr_compensation c join ehr_emp  e on  c.emp_id=e.id join ehr_socialsecurity s on s.id =c.socialSecurity_id
+    <where>
+      <if test="_parameter!=null">
+        and c.id=#{id}
+      </if>
+      and c.logicToDelete =1
+    </where>
+  </select>
+</mapper>

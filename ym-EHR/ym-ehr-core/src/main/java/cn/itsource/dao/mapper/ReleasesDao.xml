@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itsource.dao.ReleasesDao">
+  <resultMap id="BaseResultMap" type="cn.itsource.model.Releases">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="skillsRequired" jdbcType="VARCHAR" property="skillsrequired" />
+    <result column="hiring" jdbcType="INTEGER" property="hiring" />
+    <result column="wageBudget" jdbcType="INTEGER" property="wagebudget" />
+    <result column="initiateTime" jdbcType="TIMESTAMP" property="initiatetime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="emp_id" jdbcType="INTEGER" property="empId" />
+    <result column="channel_id" jdbcType="INTEGER" property="channelId" />
+    <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete" />
+  </resultMap>
+</mapper>

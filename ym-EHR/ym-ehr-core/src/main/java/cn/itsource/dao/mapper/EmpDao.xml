@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itsource.dao.EmpDao">
+  <resultMap id="BaseResultMap" type="cn.itsource.model.Emp">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="INTEGER" property="password" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="QQ" jdbcType="VARCHAR" property="qq" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="currentAddress" jdbcType="VARCHAR" property="currentaddress" />
+    <result column="inductionTime" jdbcType="DATE" property="inductiontime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="specialty" jdbcType="VARCHAR" property="specialty" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="isLogin" jdbcType="INTEGER" property="islogin" />
+    <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete" />
+    <result property="deptId" column="dept_id" javaType="INTEGER" />
+    <result property="positionId" column="position_id" javaType="INTEGER"/>
+  <result property="paygradesId" column="paygrades_id" javaType="INTEGER"/>
+  </resultMap>
+
+  <resultMap id="ExtendsResultMap" type="cn.itsource.dto.EmpDto">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="INTEGER" property="password" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="QQ" jdbcType="VARCHAR" property="qq" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="currentAddress" jdbcType="VARCHAR" property="currentaddress" />
+    <result column="inductionTime" jdbcType="DATE" property="inductiontime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="specialty" jdbcType="VARCHAR" property="specialty" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="isLogin" jdbcType="INTEGER" property="islogin" />
+    <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete" />
+    <association property="position" javaType="Position">
+      <id column="pid" property="id"/>
+      <result column="pname" property="name"/>
+    </association>
+    <association property="paygrades" javaType="Paygrades">
+      <id property="id" column="pgid"/>
+      <result property="salary" column="salary"/>
+    </association>
+    <association property="dept" javaType="Dept">
+      <id property="id" column="did"/>
+      <result property="name" column="dname"/>
+    </association>
+  </resultMap>
+
+  <resultMap id="ExtendsResultMap1" type="Emp">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="INTEGER" property="password" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="QQ" jdbcType="VARCHAR" property="qq" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="currentAddress" jdbcType="VARCHAR" property="currentaddress" />
+    <result column="inductionTime" jdbcType="DATE" property="inductiontime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="specialty" jdbcType="VARCHAR" property="specialty" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="isLogin" jdbcType="INTEGER" property="islogin" />
+    <result column="logicToDelete" jdbcType="INTEGER" property="logictodelete" />
+    <association property="position" javaType="Position">
+      <id column="pid" property="id"/>
+      <result column="pname" property="name"/>
+    </association>
+    <association property="paygrades" javaType="Paygrades">
+      <id property="id" column="pgid"/>
+      <result property="name" column="pgname"/>
+    </association>
+    <association property="dept" javaType="Dept">
+      <id property="id" column="did"/>
+      <result property="name" column="dname"/>
+    </association>
+  </resultMap>
+
+
+  <!--suppress MybatisMapperXmlInspection -->
+  <select id="querySomeList" resultMap="ExtendsResultMap" parameterType="cn.itsource.dto.EmpDto">
+    select e.*,pg.id pgid,pg.name pgname,p.id pid,pg.salary,p.name pname,d.id did,d.name dname
+    from ehr_emp e join ehr_paygrades pg on e.paygrades_id=pg.id
+    join ehr_position p on p.id = e.position_id
+    join ehr_dept d on d.id = e.dept_id
+    where e.logicToDelete =1 and e.id
+    NOT IN (select emp_id from ehr_compensation c LEFT JOIN ehr_emp e ON c.emp_id=e.id)
+    <if test="name!=null and name !=''">
+      and e.name like concat('%',#{name},'%')
+    </if>
+    <if test="id!=null">
+      and e.id=#{id}
+    </if>
+  </select>
+
+  <!--suppress MybatisMapperXmlInspection -->
+  <select id="queryAllWithOthers" parameterType="Emp" resultMap="ExtendsResultMap1">
+    select e.*,pg.id pgid,pg.name pgname,p.id pid,pg.name pgname,p.name pname,d.id did,d.name dname
+    from ehr_emp e left join ehr_paygrades pg on e.paygrades_id=pg.id
+    left join ehr_position p on p.id = e.position_id
+    left join ehr_dept d on d.id = e.dept_id
+    where e.logicToDelete =1
+    <if test="id!=null and id !=''">
+      and e.id like concat('%',#{id},'%')
+    </if>
+    <if test="sex!=null">
+      and e.sex=#{sex}
+    </if>
+  </select>
+
+  <select id="queryByIdWithOther" parameterType="int" resultMap="ExtendsResultMap1">
+     select e.*,pg.id pgid,pg.name pgname,p.id pid,pg.salary,p.name pname,d.id did,d.name dname
+    from ehr_emp e left join ehr_paygrades pg on e.paygrades_id=pg.id
+    left join ehr_position p on p.id = e.position_id
+    left join ehr_dept d on d.id = e.dept_id
+    where e.logicToDelete =1
+    and e.id=#{id}
+  </select>
+
+</mapper>

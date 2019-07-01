@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itsource.dao.ActivityDao">
+    <resultMap id="BaseResultMap" type="cn.itsource.model.Activity">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="aid" jdbcType="INTEGER" property="id"/>
+        <result column="atheme" jdbcType="VARCHAR" property="theme"/>
+        <result column="aactivityAddress" jdbcType="VARCHAR" property="activityaddress"/>
+        <result column="aintroduce" jdbcType="VARCHAR" property="introduce"/>
+        <result column="aactivityTheDetail" jdbcType="VARCHAR" property="activitythedetail"/>
+        <result column="ainitateTime" jdbcType="TIMESTAMP" property="initatetime"/>
+        <result column="aspending" jdbcType="INTEGER" property="spending"/>
+        <result column="astate" jdbcType="INTEGER" property="state"/>
+        <result column="alogicToDelete" jdbcType="INTEGER" property="logictodelete"/>
+
+        <association property="emp" javaType="cn.itsource.model.Emp">
+            <id property="id" column="eid"/>
+            <result property="name" column="ename"/>
+        </association>
+
+    </resultMap>
+
+    <select id="queryPageListByParams" resultMap="BaseResultMap" parameterType="cn.itsource.model.Activity">
+        select a.id aid , a.theme atheme , a.activityaddress aactivityAddress , a.introduce aintroduce ,
+        a.activitythedetail aactivityTheDetail ,
+        a.initatetime ainitateTime , a.spending aspending , a.state astate , e.id eid ,e.name ename, a.logictodelete
+        alogicToDelete
+        from ehr_activity a
+        join ehr_emp e
+        on e.id=a.emp_id
+        <where>
+            <if test="activityaddress!=null and activityaddress!=''">
+                and a.activityaddress = #{activityaddress}
+            </if>
+
+            <if test="emp!=null">
+                and e.name = #{emp.name}
+            </if>
+
+        </where>
+    </select>
+
+
+    <select id="queryEmpAllList" resultMap="BaseResultMap" >
+        select a.id aid , a.theme atheme , a.activityaddress aactivityAddress , a.introduce aintroduce ,
+        a.activitythedetail aactivityTheDetail ,
+        a.initatetime ainitateTime , a.spending aspending , a.state astate , e.id eid ,e.name ename, a.logictodelete
+        alogicToDelete
+        from ehr_activity a
+        join ehr_emp e
+        on e.id=a.emp_id
+    </select>
+
+    <!--根据id查询数据-->
+    <select id="queryDeptById" resultMap="BaseResultMap" parameterType="int">
+       select a.id aid , a.theme atheme , a.activityaddress aactivityAddress , a.introduce aintroduce , a.activitythedetail aactivityTheDetail ,
+            a.initatetime ainitateTime , a.spending aspending , a.state astate , e.id eid ,e.name ename, a.logictodelete alogicToDelete
+    from ehr_activity a
+    join ehr_emp e
+    on e.id=a.emp_id
+       where a.id = #{id}
+    </select>
+
+    <!--保存活动的方法-->
+    <insert id="insertWithActivity" parameterType="cn.itsource.model.Activity">
+        insert into ehr_activity(theme,activityaddress,introduce,activitythedetail,initatetime,spending,state,emp_id,logictodelete)
+        values(#{theme},#{activityaddress},#{introduce},#{activitythedetail},#{initatetime},#{spending},#{state},#{emp.id},#{logictodelete})
+    </insert>
+
+    <!-- 修改活动的方法 -->
+    <update id="updateWithActivity" parameterType="cn.itsource.model.Activity">
+        update ehr_activity
+        <set>
+            <if test="theme!=null">
+                theme=#{theme},
+            </if>
+            <if test="activityaddress!=null">
+                activityaddress=#{activityaddress},
+            </if>
+            <if test="introduce!=null">
+                introduce=#{introduce},
+
+            </if>
+            <if test="activitythedetail!=null">
+                activitythedetail=#{activitythedetail},
+            </if>
+            <if test="initatetime!=null">
+                initatetime=#{initatetime},
+            </if>
+            <if test="spending!=null">
+                spending=#{spending},
+            </if>
+            <if test="state!=null">
+                state=#{state},
+            </if>
+            <if test="emp!=null">
+                emp_id=#{emp.id},
+            </if>
+            <if test="logictodelete!=null">
+                logictodelete=#{logictodelete},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>

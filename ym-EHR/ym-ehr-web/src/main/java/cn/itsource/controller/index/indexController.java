@@ -22,21 +22,25 @@ public class indexController extends BaseController {
 
     /*视频页*/
     @RequestMapping("/video")
-    public String video(){
-        return "redirect:/src/video/videos.jsp";
+    public String videoindex(){
+        return "redirect:/module/video/videose.jsp";
     }
 
     //后台页面
     @RequestMapping("/admin")
-    public String main(){
+    public String mainindex(){
         return "redirect:/adminLogin.jsp";
     }
 
     @RequestMapping("/loginPage")
-    public String loginPagedvo() {
+    public String loginPagedindex() {
         return "redirect:/loginPage.jsp";
     }
 
+    @RequestMapping("/team")
+    public String teamindex(){
+        return "redirect:/module/team/team.jsp";
+    }
 
 
 }

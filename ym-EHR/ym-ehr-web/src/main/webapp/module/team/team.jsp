@@ -10,10 +10,10 @@
     <title>Lithe</title>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
           rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../style.css">
+    <link rel="stylesheet" type="text/css" href="../../css/owl.carousel.css">
 
     <!--[if lt IE 9]-->
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -29,17 +29,35 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="../../header.jsp"></jsp:include>
 <!--banner starts-->
 <div class="banner-text">
     <div class="container">
         <div class="row">
             <div class="banner-info text-center">
-                <h2><span class="grey">云课堂</span > - 学生自己的课堂</h2>
+                <h2><span class="grey">云课堂</span> - 学生自己的课堂</h2>
+            </div>
+            <div class="banner-search col-md-offset-2 col-md-8 col-md-offset-2">
+                <%--<div class="col-md-3">
+                    <select class="form-control sellone">
+                        <option>Buy</option>
+                        <option>Sell</option>
+                        <option>Rent</option>
+                    </select>
+                </div>--%>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <input type="text" class="form-control selltwo" placeholder="请输入关键字">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-btn">
+                        <button type="submit">Search</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!--banner ends-->
 </header>
@@ -135,88 +153,12 @@
             </div>
         </div>
     </div>
-</section>
-
-<!--agents section starts-->
-<section class="agent" id="agents">
-    <div class="backbg">
-        <div class="container">
-            <div class="row">
-                <div class="agent-sec">
-                    <div class="col-md-12">
-                        <div class="sec-head">
-                            <h2><span>著名老师</span><a href="#"><span>·查看更多</span></a></h2>
-                            <hr></hr>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="agent-one">
-                            <div class="agent-img col-md-6 col-sm-12 col-xs-12 text-left">
-                                <img src="img/agent2.jpg" class="img-responsive">
-                            </div>
-                            <div class="agent-info col-md-6 col-sm-12 col-xs-12 text-">
-                                <h3>刘亦菲</h3>
-                                <h4>武汉</h4>
-                                <h5><a href="#">123</a></h5>
-                                <p>Office: (200) 354 354</p>
-                                <p>Mobile: (200) 354 354</p>
-                                <ul class="agent-social">
-                                    <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="agent-one">
-                            <div class="agent-img col-md-6 col-sm-12 col-xs-12 text-left">
-                                <img src="img/agent2.jpg" class="img-responsive">
-                            </div>
-                            <div class="agent-info col-md-6 col-sm-12 col-xs-12 text-">
-                                <h3>刘亦菲</h3>
-                                <h4>武汉</h4>
-                                <h5><a href="#">123</a></h5>
-                                <p>Office: (200) 354 354</p>
-                                <p>Mobile: (200) 354 354</p>
-                                <ul class="agent-social">
-                                    <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="agent-one">
-                            <div class="agent-img col-md-6 col-sm-12 col-xs-12">
-                                <img src="img/agent1.jpg" class="img-responsive">
-                            </div>
-                            <div class="agent-info col-md-6 col-sm-12 col-xs-12 text-left">
-                                <h3>邓康</h3>
-                                <h4>武汉</h4>
-                                <h5><a href="#">123</a></h5>
-                                <p>Office: (200) 354 354</p>
-                                <p>Mobile: (200) 354 354</p>
-                                <ul class="agent-social">
-                                    <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div style="margin-left: 1500px;">
+        <button type="button" class="btn btn-default btn-sm">查看更多</button>
     </div>
 </section>
+
+
 
 <!--agents section starts-->
 <section class="works" id="gallery">
@@ -309,95 +251,22 @@
         </div>
     </div>
 </section>
+<div class="tlinks">Collect from <a href="http://www.cssmoban.com/">自助建站</a></div>
 <!--testimonial section-->
-<div class="client">
-    <div class="container">
-        <div class="row">
-            <div class="cli-info">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="sec-head text-left" style="padding-bottom:50px;">
-                        <h2>Our <span>Testimonial</span></h2>
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="quotes text-left">
-                        <blockquote>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing
-                                condimentum tristique vel,
-                                <br> eleifend sed turpis. Pellentesque cursus arcu id magna euismod in elementum purus
-                                molestie.</p>
-                            <p class="name">Vivek Singh</p>
-                            <p class="degi">Web designer, Vadodara</p>
-                        </blockquote>
-                        <blockquote>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing
-                                condimentum tristique vel,
-                                <br> eleifend sed turpis. Pellentesque cursus arcu id magna euismod in elementum purus
-                                molestie.</p>
-                            <p class="name">Yogesh Singh</p>
-                            <p class="degi">Web designer, Bharuch</p>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!--news section-->
-<section class="news" id="news">
-    <div class="container">
-        <div class="row">
-            <div class="news-sec">
-                <div class="col-md-12">
-                    <div class="sec-head">
-                        <h2><span>新闻资讯</span><a href="#"><span>·查看更多</span></a></h2>
-                        <hr></hr>
-                    </div>
-                </div>
-                <div class="news-colm">
-                    <div class="col-md-4">
-                        <div class="news-itm">
-                            <h4>We Fullfill Your Dream</h4>
-                            <hr class="news-line"></hr>
-                            <p>Fusce risus metus, placerat in consectetur eu, porttitor a est sed sed dolor lorem cras
-                                adipiscing</p>
-                            <a href="#" class="nws-btn">Read More</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="news-itm">
-                            <h4>We Fullfill Your Dream</h4>
-                            <hr class="news-line"></hr>
-                            <p>Fusce risus metus, placerat in consectetur eu, porttitor a est sed sed dolor lorem cras
-                                adipiscing</p>
-                            <a href="#" class="nws-btn">Read More</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="news-itm">
-                            <h4>We Fullfill Your Dream</h4>
-                            <hr class="news-line"></hr>
-                            <p>Fusce risus metus, placerat in consectetur eu, porttitor a est sed sed dolor lorem cras
-                                adipiscing</p>
-                            <a href="#" class="nws-btn">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<jsp:include page="footer.jsp"></jsp:include>
+
+<jsp:include page="../../footer.jsp"></jsp:include>
 
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/owl.carousel.js"></script>
-<script src="js/jquery.mixitup.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/jquery.quovolver.js"></script>
-<script src="js/jquery.quovolver.min.js"></script>
-<script src="js/login/login.js"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/jquery-1.11.3.min.js"></script>
+<script src="../../js/owl.carousel.js"></script>
+<script src="../../js/jquery.mixitup.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/jquery.quovolver.js"></script>
+<script src="../../js/jquery.quovolver.min.js"></script>
+<script src="../../js/login/login.js"></script>
 <!--for smooth scrolling-->
 <script>
     $(function () {

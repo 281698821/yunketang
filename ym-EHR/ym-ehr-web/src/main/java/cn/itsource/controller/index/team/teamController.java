@@ -1,15 +1,16 @@
 package cn.itsource.controller.index.team;
 
+import cn.itsource.common.base.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/team")
-public class teamController {
+public class teamController extends BaseController {
 
 
-    @RequestMapping("/list")
+    @RequestMapping("/index")
     public String teamList(){
-        return null;
+        return "redirect:/module/team/team.jsp";
     }
 }
